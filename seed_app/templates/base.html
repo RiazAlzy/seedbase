@@ -9,7 +9,18 @@
 </head>
 <body>
     <header>
-        <h1>Minecraft Seedbase</h1>
+            <h1>Minecraft Seedbase</h1>
+            <div class="auth-links">
+                {% if user.is_authenticated %}
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="auth-btn auth-btn-logout">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="auth-btn auth-btn-login">Login</a>
+                    <a href="{% url 'register' %}" class="auth-btn auth-btn-login">Sign Up</a>
+                {% endif %}
+            </div>
     </header>
 
     <main class="container">

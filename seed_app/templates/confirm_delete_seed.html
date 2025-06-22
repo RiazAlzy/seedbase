@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="confirm-delete">
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete the seed "{{ seed.seed_text }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-delete">Delete Seed</button>
+        <a href="{% url 'my_seeds' %}" class="btn btn-cancel">Cancel</a>
+    </form>
+</div>
+{% endblock %}

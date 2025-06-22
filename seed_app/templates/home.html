@@ -2,6 +2,9 @@
 
 {% block content %}
 <div class="home-menu">
+    {% if user.is_authenticated %}
+        <a href="{% url 'my_seeds' %}" class="btn btn-tertiary">My Seeds</a>
+    {% endif %}
     <a href="{% url 'search_seed' %}" class="btn btn-primary">Search Seed</a>
     <a href="{% url 'upload_seed' %}" class="btn btn-secondary">Upload Seed</a>
 </div>

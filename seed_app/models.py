@@ -1,9 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Seed(models.Model):
     # Core Details
     seed_text = models.CharField(max_length=100, unique=True, help_text="541cd55155165")
     spawn = models.CharField(max_length=500, help_text="spawn in plains biome on top of a woodland mansion")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
   
     cherry_grove_distance = models.IntegerField(null=True, blank=True)

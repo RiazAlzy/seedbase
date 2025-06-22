@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <a href="{% url 'home' %}" class="back-button">Back to Home</a>
     <h2>Search for a Seed</h2>
     <form method="get" class="styled-form">
         <p>Find seeds where structures are within a certain distance from spawn.</p>
         {{ form.as_p }}
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Search</button>
-            <a href="{% url 'home' %}" class="btn btn-back">Back to Home</a>
         </div>
     </form>
 
@@ -18,6 +18,7 @@
         {% for seed in seeds %}
             <div class="seed-card">
                 <h4>Seed: {{ seed.seed_text }}</h4>
+                <p><strong>Uploaded By:</strong> {% if seed.user %}{{ seed.user.username }}{% else %}Anonymous{% endif %}</p>
                 <p><strong>Spawn:</strong> {{ seed.spawn }}</p>
                 <ul>
                     {% if seed.cherry_grove_distance %}<li><strong>Cherry Grove:</strong> {{ seed.cherry_grove_distance }} blocks ({{ seed.cherry_grove_coords }})</li>{% endif %}

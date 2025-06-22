@@ -1,12 +1,23 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
 from .models import Seed
+
+# This form is for user registration
+class UserRegisterForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        fields = UserCreationForm.Meta.fields + ('email',)
 
 # This form is for uploading a new seed
 class SeedUploadForm(forms.ModelForm):
     class Meta:
         model = Seed
-        # We list all fields from the model, Django will create the form inputs
         fields = '__all__'
+        exclude = ['user']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields.pop('user', None)
         widgets = {
             # Add placeholders to guide the user
             'seed_text': forms.TextInput(attrs={'placeholder': 'e.g., 123456789'}),
