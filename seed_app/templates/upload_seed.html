@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Upload a New Seed</h2>
+    <form method="post" class="styled-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Upload Seed</button>
+            <a href="{% url 'home' %}" class="btn btn-back">Back to Home</a>
+        </div>
+    </form>
+{% endblock %}

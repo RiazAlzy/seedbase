@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Search for a Seed</h2>
+    <form method="get" class="styled-form">
+        <p>Find seeds where structures are within a certain distance from spawn.</p>
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a href="{% url 'home' %}" class="btn btn-back">Back to Home</a>
+        </div>
+    </form>
+
+    <hr>
+
+    <h3>Search Results</h3>
+    <div class="results-grid">
+        {% for seed in seeds %}
+            <div class="seed-card">
+                <h4>Seed: {{ seed.seed_text }}</h4>
+                <p><strong>Spawn:</strong> {{ seed.spawn }}</p>
+                <ul>
+                    {% if seed.cherry_grove_distance %}<li><strong>Cherry Grove:</strong> {{ seed.cherry_grove_distance }} blocks ({{ seed.cherry_grove_coords }})</li>{% endif %}
+                    {% if seed.pale_garden_distance %}<li><strong>Pale Garden:</strong> {{ seed.pale_garden_distance }} blocks ({{ seed.pale_garden_coords }})</li>{% endif %}
+                    {% if seed.mangrove_swamp_distance %}<li><strong>Mangrove Swamp:</strong> {{ seed.mangrove_swamp_distance }} blocks ({{ seed.mangrove_swamp_coords }})</li>{% endif %}
+                    {% if seed.mansion_distance %}<li><strong>Woodland Mansion:</strong> {{ seed.mansion_distance }} blocks ({{ seed.mansion_coords }})</li>{% endif %}
+                    {% if seed.monument_distance %}<li><strong>Ocean Monument:</strong> {{ seed.monument_distance }} blocks ({{ seed.monument_coords }})</li>{% endif %}
+                    {% if seed.ancient_city_distance %}<li><strong>Ancient City:</strong> {{ seed.ancient_city_distance }} blocks ({{ seed.ancient_city_coords }})</li>{% endif %}
+                    {% if seed.desert_temple_distance %}<li><strong>Desert Temple:</strong> {{ seed.desert_temple_distance }} blocks ({{ seed.desert_temple_coords }})</li>{% endif %}
+                </ul>
+            </div>
+        {% empty %}
+             <p>No seeds found matching your criteria. Try a broader search or upload a new seed!</p>
+        {% endfor %}
+    </div>
+{% endblock %}
